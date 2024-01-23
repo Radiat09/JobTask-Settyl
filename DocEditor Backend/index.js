@@ -14,7 +14,11 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", (Socket) => {
-  console.log("User Connected");
+  Socket.on("userJoined", (data) => {
+    const { name, userID, roomID, host, presenter } = data;
+    Socket.join(roomID);
+    Socket.emit("userHasJoined", { success: true });
+  });
 });
 
 server.listen(port, () =>

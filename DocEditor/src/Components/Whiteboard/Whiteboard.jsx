@@ -3,7 +3,6 @@ import {
   FaAlignLeft,
   FaAlignCenter,
   FaAlignRight,
-  FaAlignJustify,
   FaBold,
   FaItalic,
   FaUnderline,
@@ -35,7 +34,12 @@ const Whiteboard = () => {
   return (
     <div>
       <section className="mt-12 mx-auto pb-8 bg-blue-300 lg:w-3/4">
-        <h1 className="text-5xl text-center p-5">My Text Editor</h1>
+        <div className="flex justify-center items-center">
+          <h1 className="text-5xl text-center p-5">My Doc Editor</h1>
+          <h2 className="text-5xl text-center text-blue-500 p-5">
+            Users Online:0
+          </h2>
+        </div>
         <div className="bg-sky-200 pb-7 w-3/4 border-black border-2 mx-auto">
           <div className="flex justify-evenly">
             <div className="flex justify-center py-8 gap-5">
