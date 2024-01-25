@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../ContextApi/ContexApi";
 
-const CreateRoomFrom = ({ roomCode, socket, setUser }) => {
+const CreateRoomFrom = ({ roomCode, socket }) => {
+  const { setUser } = useContext(AuthContext);
+
   const navigate = useNavigate();
   const [roomID, setRoomID] = useState(roomCode());
   const [name, setName] = useState("");

@@ -1,27 +1,19 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import Forms from "../../Components/Forms/Forms";
-import io from "socket.io-client";
+import { AuthContext } from "../../ContextApi/ContexApi";
 
-const server = "http://localhost:9000/";
-const connectionOptions = {
-  "force new connection": true,
-  reconnectionAttempts: "Infinity",
-  timeout: 10000,
-  transports: ["websocket"],
-};
-const socket = io(server, connectionOptions);
 const Home = () => {
-  const [user, setUser] = useState(null);
-
+  const { socket, setUsers } = useContext(AuthContext);
   useEffect(() => {
     socket.on("userHasJoined", (data) => {
       if (data.success) {
         console.log("user Joined");
+        setUsers(data.users);
       } else {
         console.log("Join error");
       }
     });
-  }, []);
+  }, [socket]);
 
   const roomCode = () => {
     let s4 = () => {
@@ -45,7 +37,7 @@ const Home = () => {
   console.log(roomCode());
   return (
     <div>
-      <Forms roomCode={roomCode} socket={socket} setUser={setUser} />
+      <Forms roomCode={roomCode} socket={socket} />
     </div>
   );
 };

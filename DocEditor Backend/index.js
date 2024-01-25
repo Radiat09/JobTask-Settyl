@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
 const { Server } = require("socket.io");
+const { addUser } = require("./utils/users");
 const port = process.env.PORT || 9000;
 
 const io = new Server(server);
@@ -16,8 +17,10 @@ app.get("/", (req, res) => {
 io.on("connection", (Socket) => {
   Socket.on("userJoined", (data) => {
     const { name, userID, roomID, host, presenter } = data;
+    const users = addUser(data);
+
     Socket.join(roomID);
-    Socket.emit("userHasJoined", { success: true });
+    Socket.emit("userHasJoined", { success: true, users });
   });
 });
 

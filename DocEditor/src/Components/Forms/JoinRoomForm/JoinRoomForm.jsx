@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../ContextApi/ContexApi";
 
-const JoinRoomForm = ({ roomCode, socket, setUser }) => {
+const JoinRoomForm = ({ roomCode, socket }) => {
+  const { setUser } = useContext(AuthContext);
+
   const [roomID, setRoomID] = useState("");
   const [name, setName] = useState("");
   const navigate = useNavigate();
